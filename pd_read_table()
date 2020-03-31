@@ -1,0 +1,417 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.7.4"
+    },
+    "colab": {
+      "name": "pd.read_table()",
+      "provenance": [],
+      "collapsed_sections": [],
+      "include_colab_link": true
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/mizykk/Basic/blob/master/pd_read_table()\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "v4T_AqKyxDUo",
+        "colab_type": "text"
+      },
+      "source": [
+        "## pd.read_table( )"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "lSSsy8bZxDUp",
+        "colab_type": "text"
+      },
+      "source": [
+        "_pandas.read_html(io, match='.+', flavor=None, header=None, index_col=None, skiprows=None, attrs=None, parse_dates=False, tupleize_cols=None, thousands=', ', encoding=None, decimal='.', converters=None, na_values=None, keep_default_na=True, displayed_only=True)_  "
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "OYPwlqUTxDUq",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "import pandas as pd"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "BP_SiwHjxDUu",
+        "colab_type": "text"
+      },
+      "source": [
+        "pd.read_html을 이용하면 html에 있는 table속성에 해당하는 값을 가져올 수 있다.  \n",
+        "이는 웹페이지에 있는 표를 불러오겠다는 의미이다. \n",
+        "\n",
+        "\n",
+        "예제 URL : https://mizykk.tistory.com/39  \n",
+        "예제 페이지에는 3개의 표가 있다.   "
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "C9bhxe_oxDUv",
+        "colab_type": "text"
+      },
+      "source": [
+        "### 표 가져오기"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "BVTHYNTFxDUv",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "table = pd.read_html('https://mizykk.tistory.com/39', header=0, encoding='utf-8')"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "_Rw-WVodxDUy",
+        "colab_type": "text"
+      },
+      "source": [
+        "- header = int or list-like or None, optional   \n",
+        ": header로(열 이름) 쓸 행을 지정할 수 있다. \n",
+        "- encoding = str or None, optional  \n",
+        ": 인코딩 설정. 한글이 깨져서 나올 때 encoding = 'utf-8'으로 설정하면 된다.  "
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "P38YldNBxDUz",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 251
+        },
+        "outputId": "65c61451-ab22-4533-bb7f-907881369a4d"
+      },
+      "source": [
+        "table"
+      ],
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[    과일  색상     가격\n",
+              " 0   사과  빨강  1500원\n",
+              " 1   사과  초록  1000원\n",
+              " 2  바나나  노랑  3000원\n",
+              " 3  바나나  초록  2000원,      국가   도시     언어\n",
+              " 0    한국   서울    한국어\n",
+              " 1    미국   뉴욕     영어\n",
+              " 2  이탈리아  피렌체  이탈리아어\n",
+              " 3   프랑스   파리     불어,   한국어        영어\n",
+              " 0  1월   January\n",
+              " 1  2월  Feburary\n",
+              " 2  3월     March,                    pd.read_table 예제 (0)    20:48:47\n",
+              " 0  [Python] 위경도 거리 구하기 :: haversine (0)  2020.01.28]"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 3
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "REjtCYl9xDU3",
+        "colab_type": "text"
+      },
+      "source": [
+        "이때 리스트 안에 데이터프레임이 들어있는 형태로 html에 있는 모든 table을 한번에 가져오게 되므로, 인덱스를 이용하여 원하는 표를 개별 데이터프레임으로 지정해주면 된다.  "
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "rR64ABYJxDU4",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 173
+        },
+        "outputId": "3ae65848-4962-4cc8-fa9f-fb029193d5b6"
+      },
+      "source": [
+        "table[1]"
+      ],
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>국가</th>\n",
+              "      <th>도시</th>\n",
+              "      <th>언어</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>한국</td>\n",
+              "      <td>서울</td>\n",
+              "      <td>한국어</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>미국</td>\n",
+              "      <td>뉴욕</td>\n",
+              "      <td>영어</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>이탈리아</td>\n",
+              "      <td>피렌체</td>\n",
+              "      <td>이탈리아어</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>프랑스</td>\n",
+              "      <td>파리</td>\n",
+              "      <td>불어</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "     국가   도시     언어\n",
+              "0    한국   서울    한국어\n",
+              "1    미국   뉴욕     영어\n",
+              "2  이탈리아  피렌체  이탈리아어\n",
+              "3   프랑스   파리     불어"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 4
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "0quYRp3DxDU7",
+        "colab_type": "text"
+      },
+      "source": [
+        "#### 원하는 내용이 들어있는 표만 가져오기"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "I816pgcCxDU7",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 107
+        },
+        "outputId": "284a8cc0-e3fe-4ec0-a39a-afebab91e07e"
+      },
+      "source": [
+        "table2 = pd.read_html('https://mizykk.tistory.com/39', match = '국가', header=0, encoding='utf-8')\n",
+        "table2"
+      ],
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[     국가   도시     언어\n",
+              " 0    한국   서울    한국어\n",
+              " 1    미국   뉴욕     영어\n",
+              " 2  이탈리아  피렌체  이탈리아어\n",
+              " 3   프랑스   파리     불어]"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 5
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "MG08NauhxDU-",
+        "colab_type": "text"
+      },
+      "source": [
+        "- match : str or compiled regular expression, optional  \n",
+        ": 정규표현식 또는 문자열을 이용해서 전체 테이블을 가져오지말고 원하는 내용이 들어있는 테이블만 가져오게 함.  "
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "N-baU3KOxDU_",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 173
+        },
+        "outputId": "3ce49376-12cb-4a1c-877c-128ad685095b"
+      },
+      "source": [
+        "table2[0]"
+      ],
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>국가</th>\n",
+              "      <th>도시</th>\n",
+              "      <th>언어</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>한국</td>\n",
+              "      <td>서울</td>\n",
+              "      <td>한국어</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>미국</td>\n",
+              "      <td>뉴욕</td>\n",
+              "      <td>영어</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>이탈리아</td>\n",
+              "      <td>피렌체</td>\n",
+              "      <td>이탈리아어</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>프랑스</td>\n",
+              "      <td>파리</td>\n",
+              "      <td>불어</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "     국가   도시     언어\n",
+              "0    한국   서울    한국어\n",
+              "1    미국   뉴욕     영어\n",
+              "2  이탈리아  피렌체  이탈리아어\n",
+              "3   프랑스   파리     불어"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 6
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "41cqGg_5xDVC",
+        "colab_type": "text"
+      },
+      "source": [
+        "이때 html에서 하나의 표만 불러왔더라도 리스트안에 데이터프레임이 들어있는 형태이다. 따라서 table을 데이터프레임으로 활용하려면 인덱스로 불러주어야한다. "
+      ]
+    }
+  ]
+}
