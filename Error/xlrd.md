@@ -1,4 +1,4 @@
-# read_excel 오류 :: install xlrd
+# pd.read_excel 오류 :: install xlrd
 &nbsp;    
 **[ Error ]**  
   
